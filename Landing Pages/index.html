@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aethon Intelligence</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Nunito+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
       --bg: #08080f;
       --card: #0f0f1a;
@@ -21,7 +19,9 @@
       --text: #f0eee8;
       --muted: #666;
     }
+
     html { scroll-behavior: smooth; }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -29,446 +29,398 @@
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes pulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(255,94,0,0.4); }
-      60%      { box-shadow: 0 0 0 10px rgba(255,94,0,0); }
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,94,0,0.4); }
+      60%       { box-shadow: 0 0 0 10px rgba(255,94,0,0); }
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: 22px 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .wordmark {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .wordmark span { color: var(--accent); }
+
+    .btn-nav {
+      padding: 8px 20px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      border-radius: 5px;
+      letter-spacing: 0.01em;
+      transition: opacity 0.2s;
+    }
+
+    .btn-nav:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 32px 0 20px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: clamp(32px, 4.5vw, 56px);
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: #fff;
+      max-width: 640px;
+      margin: 0 auto 10px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .divider {
+      border-top: 1px solid var(--border);
+      margin-bottom: 48px;
+    }
+
+    /* ── RESULTS ── */
+    .results {
+      margin-bottom: 64px;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .results h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: clamp(24px, 3vw, 36px);
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .videos {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      align-items: center;
+    }
+
+    .video-card {
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    .video-name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .video-name span { color: var(--accent); }
+
+    .video-wrap {
+      position: relative;
+      max-width: 214px;
+      margin: 0 auto;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 0;
+    }
+
+    .video-wrap iframe {
+      border: none;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      overflow: hidden;
+    }
+
+    /* Per-video crop settings */
+    .video-gus    { padding-bottom: 45%; }
+    .video-gus    iframe { height: 260%; top: -80%; }
+
+    .video-jaime  { padding-bottom: 45%; }
+    .video-jaime  iframe { height: 260%; top: -80%; }
+
+    .video-marco  { padding-bottom: 60%; }
+    .video-marco  iframe { height: 220%; top: -55%; }
+
+    /* ── PLATFORMS ── */
+    .platforms {
+      border-top: 1px solid var(--border);
+      padding: 56px 0 48px;
+      text-align: center;
+    }
+
+    .platforms-label {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .platform-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .platform-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .platform-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .platform-icon img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+    }
+
+    .platform-icon.light-bg {
+      background: #f0f0f0;
+    }
+
+    .platform-icon.light-bg img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+    }
+
+    .platform-name {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ── CTA BUTTON ── */
+    .btn-cta {
+      display: inline-block;
+      padding: 16px 44px;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 6px;
+      box-shadow: 0 0 32px rgba(255,94,0,0.3);
+      transition: all 0.2s;
+      animation: pulse 2.5s infinite;
+    }
+
+    .btn-cta:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER WORDMARK ── */
+    .footer-wordmark {
+      text-align: center;
+      padding-bottom: 32px;
+    }
+
+    .footer-wordmark span {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: #1e1e2e;
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .platform-grid { gap: 28px; }
+      .video-name { font-size: 17px; }
     }
   </style>
 </head>
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const { useState, useEffect } = React;
 
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "accent": "#ff5e00",
-  "cta": "Book a Free Strategy Call",
-  "calendly": "https:\/\/calendly.com\/jahanp-aethonintelligence\/30min"
-}/*EDITMODE-END*/;
+<div class="container">
 
-function useTweaks() {
-  const [t, setT] = useState(TWEAK_DEFAULTS);
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    document.documentElement.style.setProperty('--accent', t.accent);
-    document.documentElement.style.setProperty('--accent-dim', t.accent + '22');
-  }, [t.accent]);
-  useEffect(() => {
-    window.addEventListener('message', e => {
-      if (e.data?.type === '__activate_edit_mode') setOpen(true);
-      if (e.data?.type === '__deactivate_edit_mode') setOpen(false);
-    });
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
-  }, []);
-  const set = (k, v) => {
-    setT(prev => {
-      const next = { ...prev, [k]: v };
-      window.parent.postMessage({ type: '__edit_mode_set_keys', edits: next }, '*');
-      return next;
-    });
-  };
-  return { t, open, set };
-}
+  <!-- HEADER -->
+  <header>
+    <span class="wordmark">Aethon<span>.</span></span>
+    <a href="https://calendly.com/jahanp-aethonintelligence/30min" target="_blank" rel="noreferrer" class="btn-nav">Book a Call</a>
+  </header>
 
-/* ── QUIZ ─────────────────────────────────── */
-const QS = [
-  { q: 'What type of business do you run?', opts: ['Home Services (HVAC, Plumbing, Roofing…)', 'Real Estate / Mortgage', 'Med Spa / Health & Wellness', 'Legal / Financial Services', 'Other Local Business'] },
-  { q: 'Where are you located?', type: 'text', placeholder: 'City, State' },
-  { q: 'How are you currently getting clients?', opts: ['Paid ads (Google, Meta)', 'Word of mouth / referrals', 'Organic social', 'Not consistently — that\'s the problem'] },
-  { q: 'What\'s your biggest challenge right now?', opts: ['Not enough leads', 'Leads don\'t convert', 'Too much time on follow-up', 'All of the above — I need help'] },
-];
+  <!-- HERO -->
+  <div class="hero">
+    <p class="eyebrow">AI-Powered Growth</p>
+    <h1>Stop Relying on <span>Old Funnels.</span> Get Leads From Online Visibility.</h1>
+  </div>
 
-function Quiz({ cta, calendly }) {
-  const [step, setStep] = useState(0);
-  const [ans, setAns] = useState({});
-  const [txt, setTxt] = useState('');
-  const [done, setDone] = useState(false);
-  const q = QS[step];
+  <!-- DIVIDER -->
+  <div class="divider"></div>
 
-  const next = (val) => {
-    setAns(a => ({ ...a, [step]: val }));
-    if (step < QS.length - 1) setTimeout(() => setStep(s => s + 1), 220);
-    else setTimeout(() => setDone(true), 220);
-  };
+  <!-- RESULTS & VIDEOS -->
+  <div class="results">
+    <p class="section-eyebrow">Real Results</p>
+    <h2>What Our Clients Are Saying</h2>
 
-  if (done) return (
-    <div style={{ textAlign: 'center', padding: '8px 0', animation: 'fadeUp 0.4s ease both' }}>
-      <div style={{
-        width: 48, height: 48, borderRadius: '50%',
-        background: 'var(--accent)', margin: '0 auto 16px',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        fontSize: 20, color: '#fff',
-      }}>✓</div>
-      <p style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: 22, marginBottom: 8 }}>You're a great fit.</p>
-      <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 24, lineHeight: 1.6 }}>
-        We take limited clients each month. Book your free strategy call now.
-      </p>
-      <a href={calendly} target="_blank" rel="noreferrer" style={{
-        display: 'inline-block', padding: '14px 36px',
-        background: 'var(--accent)', color: '#fff',
-        fontFamily: 'Nunito', fontWeight: 700, fontSize: 15,
-        textDecoration: 'none', borderRadius: 6,
-        animation: 'pulse 2.2s infinite',
-      }}>
-        {cta} →
-      </a>
-    </div>
-  );
+    <div class="videos">
 
-  return (
-    <div key={step} style={{ animation: 'fadeUp 0.28s ease both' }}>
-      {/* progress bar */}
-      <div style={{ height: 2, background: 'var(--border)', borderRadius: 2, marginBottom: 20 }}>
-        <div style={{
-          height: '100%', borderRadius: 2, background: 'var(--accent)',
-          width: `${(step / QS.length) * 100}%`, transition: 'width 0.35s ease',
-        }} />
-      </div>
-      <p style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 10, letterSpacing: '0.06em' }}>
-        {step + 1} / {QS.length}
-      </p>
-      <p style={{ fontFamily: 'Nunito', fontWeight: 700, fontSize: 17, marginBottom: 16, lineHeight: 1.35 }}>
-        {q.q}
-      </p>
-      {q.type === 'text' ? (
-        <div style={{ display: 'flex', gap: 8 }}>
-          <input autoFocus value={txt} onChange={e => setTxt(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && txt.trim() && next(txt)}
-            placeholder={q.placeholder}
-            style={{
-              flex: 1, background: 'rgba(255,255,255,0.05)',
-              border: '1px solid var(--border)', color: '#fff',
-              padding: '11px 14px', fontSize: 14, borderRadius: 6,
-              fontFamily: 'Nunito Sans', outline: 'none',
-            }} />
-          <button onClick={() => txt.trim() && next(txt)} style={{
-            background: 'var(--accent)', color: '#fff', border: 'none',
-            padding: '11px 20px', fontFamily: 'Nunito', fontWeight: 700,
-            fontSize: 13, cursor: 'pointer', borderRadius: 6,
-          }}>→</button>
-        </div>
-      ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {q.opts.map((o, i) => (
-            <button key={i} onClick={() => next(o)} style={{
-              background: ans[step] === o ? 'var(--accent-dim)' : 'rgba(255,255,255,0.03)',
-              border: `1px solid ${ans[step] === o ? 'var(--accent)' : 'var(--border)'}`,
-              color: '#fff', padding: '11px 14px', fontSize: 13,
-              fontFamily: 'Nunito Sans', cursor: 'pointer', textAlign: 'left',
-              borderRadius: 6, transition: 'all 0.15s',
-            }}
-            onMouseEnter={e => { if (ans[step] !== o) e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; }}
-            onMouseLeave={e => { if (ans[step] !== o) e.currentTarget.style.borderColor = 'var(--border)'; }}
-            >{o}</button>
-          ))}
-        </div>
-      )}
-      {step > 0 && (
-        <button onClick={() => setStep(s => s - 1)} style={{
-          background: 'none', border: 'none', color: 'var(--muted)',
-          fontSize: 12, cursor: 'pointer', marginTop: 12, fontFamily: 'Nunito Sans',
-        }}>← back</button>
-      )}
-    </div>
-  );
-}
-
-/* ── VIDEO CARD ───────────────────────────── */
-function VideoCard({ name, result, detail }) {
-  const [hov, setHov] = useState(false);
-  return (
-    <div style={{ marginBottom: 48, textAlign: 'center' }}>
-      {/* Title above video */}
-      <p style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: 22, color: '#fff', marginBottom: 4 }}>
-        {name} — <span style={{ color: 'var(--accent)' }}>{result}</span>
-      </p>
-      {/* Video shell */}
-      <div
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        style={{
-          aspectRatio: '9/16',
-          maxHeight: 380, maxWidth: 214, margin: '0 auto',
-          background: '#0a0a16',
-          border: `1px solid ${hov ? 'var(--accent)' : 'var(--border)'}`,
-          borderRadius: 10, overflow: 'hidden',
-          display: 'flex', flexDirection: 'column',
-          alignItems: 'center', justifyContent: 'center', gap: 12,
-          position: 'relative',
-          backgroundImage: 'repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,255,255,0.015) 10px, rgba(255,255,255,0.015) 20px)',
-          transition: 'border-color 0.2s',
-          cursor: 'pointer',
-        }}>
-        <div style={{
-          width: 48, height: 48, borderRadius: '50%',
-          border: '1.5px solid var(--accent)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          transition: 'background 0.2s, transform 0.2s',
-          background: hov ? 'var(--accent-dim)' : 'transparent',
-          transform: hov ? 'scale(1.1)' : 'scale(1)',
-        }}>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="var(--accent)">
-            <path d="M3 2l10 5-10 5V2z"/>
-          </svg>
-        </div>
-        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', letterSpacing: '0.1em' }}>VIDEO INCOMING</p>
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'var(--accent)' }} />
-      </div>
-    </div>
-  );
-}
-
-/* ── TWEAKS ───────────────────────────────── */
-function TweaksPanel({ t, set }) {
-  return (
-    <div style={{
-      position: 'fixed', bottom: 20, right: 20, zIndex: 9999,
-      background: '#111', border: '1px solid #222', borderRadius: 10,
-      padding: 18, width: 240, fontFamily: 'Nunito Sans',
-    }}>
-      <p style={{ fontSize: 10, letterSpacing: '0.1em', color: 'var(--accent)', textTransform: 'uppercase', fontWeight: 700, marginBottom: 14 }}>Tweaks</p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <label style={{ fontSize: 12, color: '#999' }}>Accent Color
-          <input type="color" value={t.accent} onChange={e => set('accent', e.target.value)}
-            style={{ display: 'block', marginTop: 4, width: '100%', height: 28, border: 'none', cursor: 'pointer', background: 'none' }} />
-        </label>
-        <label style={{ fontSize: 12, color: '#999' }}>CTA Label
-          <input type="text" value={t.cta} onChange={e => set('cta', e.target.value)}
-            style={{ display: 'block', marginTop: 4, width: '100%', background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#fff', padding: '6px 10px', fontSize: 12, borderRadius: 5, fontFamily: 'Nunito Sans' }} />
-        </label>
-        <label style={{ fontSize: 12, color: '#999' }}>Calendly URL
-          <input type="text" value={t.calendly} onChange={e => set('calendly', e.target.value)}
-            style={{ display: 'block', marginTop: 4, width: '100%', background: '#1a1a1a', border: '1px solid #2a2a2a', color: '#fff', padding: '6px 10px', fontSize: 12, borderRadius: 5, fontFamily: 'Nunito Sans' }} />
-        </label>
-      </div>
-    </div>
-  );
-}
-
-/* ── APP ──────────────────────────────────── */
-function App() {
-  const { t, open, set } = useTweaks();
-
-  return (
-    <div style={{ maxWidth: 980, margin: '0 auto', padding: '0 20px' }}>
-
-      {/* ── HEADER ── */}
-      <header style={{
-        padding: '22px 0 18px',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        borderBottom: '1px solid var(--border)',
-      }}>
-        <span style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: 15, letterSpacing: '0.01em', color: '#fff' }}>
-          Aethon<span style={{ color: 'var(--accent)' }}>.</span>
-        </span>
-        <a href={t.calendly} target="_blank" rel="noreferrer" style={{
-          padding: '8px 20px', background: 'var(--accent)', color: '#fff',
-          fontFamily: 'Nunito', fontWeight: 700, fontSize: 13,
-          textDecoration: 'none', borderRadius: 5, letterSpacing: '0.01em',
-          transition: 'opacity 0.2s',
-        }}
-        onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
-        onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-        >Book a Call</a>
-      </header>
-
-      {/* ── HERO ── */}
-      <div style={{ textAlign: 'center', padding: '32px 0 20px', animation: 'fadeUp 0.6s ease both' }}>
-        <p style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: 10 }}>
-          AI-Powered Growth
-        </p>
-        <h1 style={{
-          fontFamily: 'Nunito', fontWeight: 800,
-          fontSize: 'clamp(32px, 4.5vw, 56px)',
-          lineHeight: 1.12, letterSpacing: '-0.02em',
-          color: '#fff', marginBottom: 10, maxWidth: 640, margin: '0 auto 10px',
-        }}>
-          Stop Relying on <span style={{ color: 'var(--accent)' }}>Old Funnels.</span> Get Leads From Online Visibility.
-        </h1>
-
-      </div>
-      {/* ── DIVIDER ── */}
-      <div style={{ borderTop: '1px solid var(--border)', marginBottom: 48 }} />
-
-      {/* ── RESULTS & VIDEOS ── */}
-      <div style={{ marginBottom: 64 }}>
-        <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: 8, textAlign: 'center' }}>
-          Real Results
-        </p>
-        <h2 style={{
-          fontFamily: 'Nunito', fontWeight: 800,
-          fontSize: 'clamp(24px, 3vw, 36px)', letterSpacing: '-0.02em',
-          marginBottom: 32, color: '#fff', textAlign: 'center',
-        }}>
-          What Our Clients Are Saying
-        </h2>
-
-        {/* Videos grid */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 0, alignItems: 'center' }}>
-          <div style={{ marginBottom: 48, textAlign: 'center' }}>
-            <p style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: 22, color: '#fff', marginBottom: 4 }}>
-              Gus Z — <span style={{ color: 'var(--accent)' }}>$120 spent, $35k+ made — 3 homes under contract first month</span>
-            </p>
-            <div style={{
-              position: 'relative', maxWidth: 214, margin: '0 auto',
-              borderRadius: 10, overflow: 'hidden',
-              border: '1px solid var(--border)',
-              paddingBottom: '30%', height: 0,
-            }}>
-              <iframe
-                allow="fullscreen"
-                allowFullScreen
-                src="https://streamable.com/e/c9jbm2"
-                style={{
-                  border: 'none',
-                  width: '100%', height: '320%',
-                  position: 'absolute', left: 0, top: '-110%', overflow: 'hidden',
-                }}
-              ></iframe>
-            </div>
-          </div>
-          <div style={{ marginBottom: 48, textAlign: 'center' }}>
-            <p style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: 22, color: '#fff', marginBottom: 4 }}>
-              Active Fire Sprinkler — <span style={{ color: 'var(--accent)' }}>#1 on ChatGPT in all of Miami in 15 days</span>
-            </p>
-            <div style={{
-              position: 'relative', maxWidth: 214, margin: '0 auto',
-              borderRadius: 10, overflow: 'hidden',
-              border: '1px solid var(--border)',
-              paddingBottom: '45%', height: 0,
-            }}>
-              <iframe
-                allow="fullscreen"
-                allowFullScreen
-                src="https://streamable.com/e/h3xt3s"
-                style={{
-                  border: 'none',
-                  width: '100%', height: '260%',
-                  position: 'absolute', left: 0, top: '-80%', overflow: 'hidden',
-                }}
-              ></iframe>
-            </div>
-          </div>
-          <div style={{ marginBottom: 48, textAlign: 'center' }}>
-            <p style={{ fontFamily: 'Nunito', fontWeight: 900, fontSize: 22, color: '#fff', marginBottom: 4 }}>
-              Marco — <span style={{ color: 'var(--accent)' }}>250+ buyer leads in one month — $1.52 CPL</span>
-            </p>
-            <div style={{
-              position: 'relative', maxWidth: 214, margin: '0 auto',
-              borderRadius: 10, overflow: 'hidden',
-              border: '1px solid var(--border)',
-              paddingBottom: '45%', height: 0,
-            }}>
-              <iframe
-                allow="fullscreen"
-                allowFullScreen
-                src="https://streamable.com/e/y4vr9e"
-                style={{
-                  border: 'none',
-                  width: '100%', height: '260%',
-                  position: 'absolute', left: 0, top: '-80%', overflow: 'hidden',
-                }}
-              ></iframe>
-            </div>
-          </div>
+      <!-- Gus Z -->
+      <div class="video-card">
+        <p class="video-name">Gus Z &mdash; <span>$120 spent, $35k+ made &mdash; 3 homes under contract first month</span></p>
+        <div class="video-wrap video-gus">
+          <iframe src="https://streamable.com/e/a8cv12" allow="fullscreen" allowfullscreen></iframe>
         </div>
       </div>
 
-
-      {/* ── PLATFORMS ── */}
-      <div style={{ borderTop: '1px solid var(--border)', padding: '56px 0 48px', textAlign: 'center' }}>
-        <p style={{ fontSize: 15, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: 16 }}>
-          We Generate Leads Through
-        </p>
-
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 48, flexWrap: 'wrap', marginBottom: 56 }}>
-
-          {/* Meta */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 56, height: 56, borderRadius: 12, overflow: 'hidden' }}>
-              <img src="uploads/Screenshot 2026-04-22 180713.png" alt="Meta" style={{ width: 56, height: 56, objectFit: 'cover' }} />
-            </div>
-            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>Meta</span>
-          </div>
-
-          {/* ChatGPT */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 56, height: 56, borderRadius: 12, overflow: 'hidden', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="uploads/pasted-1777078925609-0.png" alt="ChatGPT" style={{ width: 46, height: 46, objectFit: 'contain' }} />
-            </div>
-            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>ChatGPT</span>
-          </div>
-
-          {/* Gemini */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <svg width="56" height="56" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 6c-.4 5.8-2.4 10.2-14 14 11.6 3.8 13.6 8.2 14 14 .4-5.8 2.4-10.2 14-14-11.6-3.8-13.6-8.2-14-14z" fill="url(#gemini-grad)"/>
-              <defs>
-                <linearGradient id="gemini-grad" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#4285F4"/>
-                  <stop offset="0.5" stopColor="#9B72CB"/>
-                  <stop offset="1" stopColor="#D96570"/>
-                </linearGradient>
-              </defs>
-            </svg>
-            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>Gemini</span>
-          </div>
-
-          {/* Perplexity */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 56, height: 56, borderRadius: 12, overflow: 'hidden' }}>
-              <img src="uploads/pasted-1777078969356-0.png" alt="Perplexity" style={{ width: 56, height: 56, objectFit: 'cover' }} />
-            </div>
-            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>Perplexity</span>
-          </div>
-
-          {/* Google */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-            <svg width="56" height="56" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M35.5 20.4c0-1.1-.1-2.2-.3-3.2H20v6h8.7c-.4 2-1.5 3.7-3.2 4.8v4h5.2c3-2.8 4.8-6.9 4.8-11.6z" fill="#4285F4"/>
-              <path d="M20 36c4.4 0 8.1-1.5 10.8-3.9l-5.2-4c-1.5 1-3.4 1.6-5.6 1.6-4.3 0-7.9-2.9-9.2-6.8H5.4v4.1C8.1 32.1 13.7 36 20 36z" fill="#34A853"/>
-              <path d="M10.8 22.9c-.3-1-.5-2-.5-3s.2-2 .5-3v-4.1H5.4C4.5 14.7 4 17.3 4 20s.5 5.3 1.4 7.1l5.4-4.2z" fill="#FBBC05"/>
-              <path d="M20 10.2c2.4 0 4.6.8 6.3 2.4l4.7-4.7C28.1 5.2 24.4 4 20 4c-6.3 0-11.9 3.9-14.6 9.8l5.4 4.2c1.3-3.9 4.9-7.8 9.2-7.8z" fill="#EA4335"/>
-            </svg>
-            <span style={{ fontSize: 13, color: 'var(--muted)', fontWeight: 600 }}>Google</span>
-          </div>
-
+      <!-- Active Fire Sprinkler -->
+      <div class="video-card">
+        <p class="video-name">Active Fire Sprinkler &mdash; <span>#1 on ChatGPT in all of Miami in 15 days</span></p>
+        <div class="video-wrap video-jaime">
+          <iframe src="https://streamable.com/e/h3xt3s" allow="fullscreen" allowfullscreen></iframe>
         </div>
-
-        {/* CTA */}
-        <a href={t.calendly} target="_blank" rel="noreferrer" style={{
-          display: 'inline-block',
-          padding: '16px 44px',
-          background: 'var(--accent)', color: '#fff',
-          fontFamily: 'Nunito', fontWeight: 800, fontSize: 16,
-          textDecoration: 'none', borderRadius: 6,
-          boxShadow: '0 0 32px rgba(255,94,0,0.3)',
-          transition: 'all 0.2s',
-          animation: 'pulse 2.5s infinite',
-        }}
-        onMouseEnter={e => { e.currentTarget.style.opacity='0.88'; e.currentTarget.style.transform='translateY(-2px)'; }}
-        onMouseLeave={e => { e.currentTarget.style.opacity='1'; e.currentTarget.style.transform='translateY(0)'; }}
-        >
-          Book a Free Strategy Call →
-        </a>
-      </div>
-      {/* ── WORDMARK ── */}
-      <div style={{ textAlign: 'center', paddingBottom: 32 }}>
-        <span style={{ fontFamily: 'Nunito', fontWeight: 800, fontSize: 11, letterSpacing: '0.18em', color: '#1e1e2e', textTransform: 'uppercase' }}>
-          Aethon Intelligence
-        </span>
       </div>
 
-      {open && <TweaksPanel t={t} set={set} />}
+      <!-- Marco -->
+      <div class="video-card">
+        <p class="video-name">Marco &mdash; <span>250+ buyer leads in one month &mdash; $1.52 CPL</span></p>
+        <div class="video-wrap video-marco">
+          <iframe src="https://streamable.com/e/y4vr9e" allow="fullscreen" allowfullscreen></iframe>
+        </div>
+      </div>
+
     </div>
-  );
-}
+  </div>
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-</script>
+  <!-- PLATFORMS -->
+  <div class="platforms">
+    <p class="platforms-label">We Generate Leads Through</p>
+
+    <div class="platform-grid">
+
+      <!-- Meta -->
+      <div class="platform-item">
+        <div class="platform-icon">
+          <img src="uploads/Screenshot 2026-04-22 180713.png" alt="Meta">
+        </div>
+        <span class="platform-name">Meta</span>
+      </div>
+
+      <!-- ChatGPT -->
+      <div class="platform-item">
+        <div class="platform-icon light-bg">
+          <img src="uploads/pasted-1777078925609-0.png" alt="ChatGPT">
+        </div>
+        <span class="platform-name">ChatGPT</span>
+      </div>
+
+      <!-- Gemini -->
+      <div class="platform-item">
+        <svg width="56" height="56" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 6c-.4 5.8-2.4 10.2-14 14 11.6 3.8 13.6 8.2 14 14 .4-5.8 2.4-10.2 14-14-11.6-3.8-13.6-8.2-14-14z" fill="url(#gemini-grad)"/>
+          <defs>
+            <linearGradient id="gemini-grad" x1="6" y1="6" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4285F4"/>
+              <stop offset="0.5" stop-color="#9B72CB"/>
+              <stop offset="1" stop-color="#D96570"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="platform-name">Gemini</span>
+      </div>
+
+      <!-- Perplexity -->
+      <div class="platform-item">
+        <div class="platform-icon">
+          <img src="uploads/pasted-1777078969356-0.png" alt="Perplexity">
+        </div>
+        <span class="platform-name">Perplexity</span>
+      </div>
+
+      <!-- Google -->
+      <div class="platform-item">
+        <svg width="56" height="56" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M35.5 20.4c0-1.1-.1-2.2-.3-3.2H20v6h8.7c-.4 2-1.5 3.7-3.2 4.8v4h5.2c3-2.8 4.8-6.9 4.8-11.6z" fill="#4285F4"/>
+          <path d="M20 36c4.4 0 8.1-1.5 10.8-3.9l-5.2-4c-1.5 1-3.4 1.6-5.6 1.6-4.3 0-7.9-2.9-9.2-6.8H5.4v4.1C8.1 32.1 13.7 36 20 36z" fill="#34A853"/>
+          <path d="M10.8 22.9c-.3-1-.5-2-.5-3s.2-2 .5-3v-4.1H5.4C4.5 14.7 4 17.3 4 20s.5 5.3 1.4 7.1l5.4-4.2z" fill="#FBBC05"/>
+          <path d="M20 10.2c2.4 0 4.6.8 6.3 2.4l4.7-4.7C28.1 5.2 24.4 4 20 4c-6.3 0-11.9 3.9-14.6 9.8l5.4 4.2c1.3-3.9 4.9-7.8 9.2-7.8z" fill="#EA4335"/>
+        </svg>
+        <span class="platform-name">Google</span>
+      </div>
+
+    </div>
+
+    <!-- FINAL CTA -->
+    <a href="https://calendly.com/jahanp-aethonintelligence/30min" target="_blank" rel="noreferrer" class="btn-cta">
+      Book a Free Strategy Call &rarr;
+    </a>
+  </div>
+
+  <!-- FOOTER WORDMARK -->
+  <div class="footer-wordmark">
+    <span>Aethon Intelligence</span>
+  </div>
+
+</div>
+
 </body>
 </html>
